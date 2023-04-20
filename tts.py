@@ -26,17 +26,16 @@ def parse_role_and_text(text):
         text = text[text.index(']') + 1:]
     return role, text
 
+# Замените значения в словаре на желаемые роли и соответствующие голоса
+roles_and_speakers = {
+    "Олег": "eugene",
+    "Role2": "kseniya",
+    "Role3": "aidar",
+    "Role4": "baya"
+}
+
 def get_speaker_by_role(role):
-    if role == '1role':
-        return 'eugene'
-    elif role == '2role':
-        return 'kseniya'
-    elif role == '3role':
-        return 'aidar'
-    elif role == '4role':
-        return 'baya'
-    else:
-        return 'baya'
+    return roles_and_speakers.get(role, 'baya')
 
 def synthesize_speech(srt_file, output_file, pause_duration_ms=500):
     with open(srt_file, "r", encoding="utf-8") as f:
@@ -74,8 +73,7 @@ def synthesize_speech(srt_file, output_file, pause_duration_ms=500):
 
     full_audio.export(output_file, format="wav")
 
-# Укажите путь к файлу субтитров и путь для сохранения итогового аудиофайла
-srt_file = "name.srt"
-output_file = "output.wav"
+srt_file = input("Введите путь к файлу субтитров: ")
+output_file = input("Введите имя итогового файла: ")
 
 synthesize_speech(srt_file, output_file)
